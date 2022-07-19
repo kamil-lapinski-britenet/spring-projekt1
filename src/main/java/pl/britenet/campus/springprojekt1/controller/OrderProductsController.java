@@ -10,12 +10,14 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/orderProducts")
 public class OrderProductsController {
+
+    private final OrderProductsService orderProductsService;
     @Autowired
     public OrderProductsController(OrderProductsService orderProductsService) {
         this.orderProductsService = orderProductsService;
     }
 
-    private final OrderProductsService orderProductsService;
+
 
     @GetMapping("/{id}")
     public Optional<OrderProducts> getOrderProduct(@PathVariable int id) {

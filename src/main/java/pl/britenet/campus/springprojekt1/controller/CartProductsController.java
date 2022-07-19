@@ -36,7 +36,7 @@ public class CartProductsController {
 
     @PutMapping
     public void updateCartProduct(@RequestBody CartProducts t) {
-        this.cartProductsService.updateCart(t);
+        this.cartProductsService.updateCartProduct(t);
     }
 
     @DeleteMapping("/delete/{id}")
