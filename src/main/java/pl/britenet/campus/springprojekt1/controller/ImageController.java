@@ -1,5 +1,6 @@
 package pl.britenet.campus.springprojekt1.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.britenet.campus.database.object.Images;
 import pl.britenet.campus.service.ImagesService;
@@ -9,6 +10,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/image")
 public class ImageController {
+    @Autowired
     private final ImagesService imagesService;
 
     public ImageController(ImagesService imagesService) {
@@ -25,12 +27,12 @@ public class ImageController {
         return this.imagesService.getImages();
     }
 
-    @PostMapping
-    public void insertUserImage(@RequestBody Images t) {
-        this.imagesService.insertUserImage(t);
+    @PostMapping("user")
+    public void insertUserImage(@RequestBody Images images) {
+        this.imagesService.insertUserImage(images);
     }
 
-    @PostMapping
+    @PostMapping("product")
     public void insertProductImage(@RequestBody Images t) {
         this.imagesService.insertProductImage(t);
     }

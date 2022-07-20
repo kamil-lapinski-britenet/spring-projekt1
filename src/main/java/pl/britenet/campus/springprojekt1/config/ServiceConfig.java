@@ -21,24 +21,36 @@ public class ServiceConfig {
     public ProductService getProductService() {
         return new ProductService(this.databaseService);
     }
-    @Bean
-    public UserService getUserService() { return new UserService(this.databaseService); }
 
     @Bean
-    public OrderService getOrderService() {return new OrderService(this.databaseService);}
+    public UserService getUserService() {
+        return new UserService(this.databaseService);
+    }
 
     @Bean
-    public CartService getCartService() {return new CartService(this.databaseService);}
+    public OrderService getOrderService() {
+        return new OrderService(this.databaseService);
+    }
 
     @Bean
-    public OrderProductsService getOrderProductsService() {return new OrderProductsService(databaseService);}
+    public CartService getCartService() {
+        return new CartService(this.databaseService);
+    }
 
     @Bean
-    public ImagesService getImagesService() {return new ImagesService(databaseService);}
+    public OrderProductsService getOrderProductsService() {
+        return new OrderProductsService(databaseService);
+    }
 
     @Bean
-    public CartProductsService getCartProductService() {return  new CartProductsService(databaseService);}
+    public ImagesService getImagesService() {
+        return new ImagesService(databaseService);
+    }
 
+    @Bean
+    public CartProductsService getCartProductService() {
+        return new CartProductsService(databaseService);
+    }
 
 
 }
