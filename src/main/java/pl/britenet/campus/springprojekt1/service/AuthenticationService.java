@@ -25,7 +25,7 @@ public class AuthenticationService {
 
 
 
-    private Map<String, String> passwordHash = new HashMap<>();
+   // private Map<String, String> passwordHash = new HashMap<>();
 
 
 
@@ -65,7 +65,7 @@ public class AuthenticationService {
 
             // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length/2; i++) {
+            for (int i = 0; i < bytes.length; i++) {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
 
@@ -75,21 +75,9 @@ public class AuthenticationService {
             e.printStackTrace();
         }
         System.out.println(generatedPassword);
-//        Scanner scan = new Scanner(System.in);
-//        String name = scan.nextLine();
-//        String lastname= scan.nextLine();
-//        String mail= scan.nextLine();
-//        String address= scan.nextLine();
-//        String telephone= scan.nextLine();
-//        user.setName(name);
-//        user.setLastName(lastname);
-//        user.setMail(mail);
-//        user.setAddress(address);
-//        user.setPassword(generatedPassword);
-//        user.setTelephone(telephone);
 
+       // passwordHash.put(generatedPassword, user.getPassword());
 
-        passwordHash.put(generatedPassword, user.getPassword());
         user.setPassword(generatedPassword);
         this.userService.insertUser(user);
 
