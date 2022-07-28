@@ -4,18 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.britenet.campus.database.object.Cart;
 import pl.britenet.campus.service.CartService;
+import pl.britenet.campus.springprojekt1.service.AuthenticationService;
 
 import java.util.List;
 import java.util.Optional;
+@CrossOrigin("null")
 @RestController
 @RequestMapping("/api/v1/cart")
 public class CartController {
 
     private final CartService cartService;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public CartController(CartService cartService) {
+    public CartController(CartService cartService, AuthenticationService authenticationService) {
         this.cartService = cartService;
+        this.authenticationService = authenticationService;
     }
 
     @GetMapping("/{cartId}")
@@ -29,7 +33,10 @@ public class CartController {
     }
 
     @PostMapping
-    public void createCart(@RequestBody Cart cart) {
+    public void createCart(@RequestHeader("Authorization") String user_token,@RequestBody Cart cart ) {
+        System.out.println("Token: " + user_token);
+        int user_id = authenticationService.getUserId(user_token);
+     //   System.out.println("Retrieved User ID: " + user_id);
         this.cartService.insertCart(cart);
     }
 

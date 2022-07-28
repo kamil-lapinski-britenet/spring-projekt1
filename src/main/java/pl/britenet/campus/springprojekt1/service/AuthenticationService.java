@@ -30,9 +30,45 @@ public class AuthenticationService {
 
 
     public UserLoginData login(UserCredentials userCredentials) {
-        Optional<User> oUser = this.userService.getUserMailPass(userCredentials.getUserMail(), userCredentials.getPassword());
+        String passwordToHash = userCredentials.getPassword();
+        String generatedPassword = null;
+
+        try
+        {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            // Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+
+            // Get the hash's bytes
+            byte[] bytes = md.digest();
+
+            // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            // Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println(generatedPassword);
+
+        // passwordHash.put(generatedPassword, user.getPassword());
+
+
+        Optional<User> oUser = this.userService.getUserMailPass(userCredentials.getUserMail(), /*userCredentials.getPassword()*/generatedPassword);
+
+
         if (oUser.isPresent()) {
             int userId = oUser.get().getUserId();
+
+
+
+
             String userToken = UUID.randomUUID().toString();
             this.activeTokens.put(userToken, userId);
             return new UserLoginData(userId, userToken);
@@ -88,5 +124,9 @@ public class AuthenticationService {
 
 
         }
+
+    public int getUserId(String token) {
+        return this.activeTokens.get(token);
+    }
 
 }

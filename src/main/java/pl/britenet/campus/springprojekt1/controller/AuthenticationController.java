@@ -7,7 +7,7 @@ import pl.britenet.campus.database.object.User;
 import pl.britenet.campus.springprojekt1.model.UserCredentials;
 import pl.britenet.campus.springprojekt1.model.UserLoginData;
 import pl.britenet.campus.springprojekt1.service.AuthenticationService;
-
+@CrossOrigin("null")
 @RestController
 @RequestMapping("/api/v1/authentication")
 public class AuthenticationController {

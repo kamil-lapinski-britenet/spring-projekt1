@@ -8,6 +8,7 @@ import pl.britenet.campus.service.CartProductsService;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/cartProducts")
 public class CartProductsController {
