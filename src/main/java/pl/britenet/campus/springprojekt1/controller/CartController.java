@@ -35,7 +35,9 @@ public class CartController {
     @PostMapping
     public void createCart(@RequestHeader("Authorization") String user_token,@RequestBody Cart cart ) {
         System.out.println("Token: " + user_token);
-        int user_id = authenticationService.getUserId(user_token);
+       //int user_id = authenticationService.getUserId(user_token);
+
+
      //   System.out.println("Retrieved User ID: " + user_id);
         this.cartService.insertCart(cart);
     }
@@ -49,5 +51,5 @@ public class CartController {
     public void delete(@PathVariable int cartId) {
         this.cartService.deleteCart(cartId);
     }
-
 }
+
